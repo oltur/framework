@@ -3,7 +3,7 @@ import { Dic } from './Globals'
 import { ajaxPost } from './Services'
 import {
   Lite, Entity, OperationMessage, EntityPack,
-  OperationSymbol, ConstructSymbol_From, ConstructSymbol_FromMany, ConstructSymbol_Simple, ExecuteSymbol, DeleteSymbol
+  OperationSymbol, ConstructSymbol_From, ConstructSymbol_FromMany, ConstructSymbol_Simple, ExecuteSymbol, DeleteSymbol, JavascriptMessage
 } from './Signum.Entities';
 import { OperationLogEntity } from './Signum.Entities.Basics';
 import { PseudoType, TypeInfo, getTypeInfo, OperationInfo, OperationType, GraphExplorer } from './Reflection';
@@ -102,8 +102,8 @@ export function operationInfos(ti: TypeInfo) {
   return Dic.getValues(ti.operations!).filter(isOperationInfoAllowed);
 }
 
-export function notifySuccess(message?: string) {
-  Notify.singleton && Notify.singleton.notifyTimeout({ text: message ?? JavascriptMessage.executed.niceToString(), type: "success", priority: 20 });
+export function notifySuccess(message?: string, timeout?: number) {
+  Notify.singleton && Notify.singleton.notifyTimeout({ text: message ?? JavascriptMessage.executed.niceToString(), type: "success", priority: 20 }, timeout);
 }
 
 /**
